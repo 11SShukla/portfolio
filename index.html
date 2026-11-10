@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Shrestha Shukla</title>
+  <meta name="description" content="Shrestha Shukla is an AI Engineer in Delhi. An interactive, story-driven portfolio told as a night sky, with a career timeline and six AI projects.">
+  <meta name="theme-color" content="#070b16">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Shrestha Shukla">
+  <meta property="og:description" content="Shrestha Shukla is an AI Engineer in Delhi. An interactive, story-driven portfolio told as a night sky, with a career timeline and six AI projects.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<canvas id="sky" aria-hidden="true"></canvas>
+<div class="topbar" aria-hidden="true"><i></i></div>
+<nav class="rail" aria-label="Story chapters">
+  <div class="rail-line"><i></i></div>
+</nav>
+
+<main>
+  <header class="wrap hero" id="prologue">
+    <p class="kicker">AI Engineer &middot; FutureVerse &middot; Delhi</p>
+    <h1>Shrestha <span class="light">Shukla</span></h1>
+    <p class="lede">I build AI that listens, looks things up, and shows where it found the answer.</p>
+    <p class="sub">This portfolio is a night sky. Each chapter lights up new stars, and the stars are the projects I have built. Scroll to follow the story.</p>
+    <div class="hero-foot">
+      <a class="btn" href="#classroom">Begin the journey &darr;</a>
+      <p class="hint"><span class="mouse">Move across the sky and the stars connect.</span><span class="touch">Touch and drag across the sky.</span></p>
+    </div>
+  </header>
+
+  <section class="chapter" id="classroom" data-title="Classroom">
+    <div class="wrap chapter-grid">
+      <div class="ch-head">
+        <p class="ch-no">Chapter I</p>
+        <h2 class="ch-title">The Classroom</h2>
+        <p class="ch-sub">Where the first stars were lit.</p>
+      </div>
+      <div class="prose">
+        <p>I studied Computer Science at Dr. Akhilesh Das Gupta Institute of Professional Studies in Delhi and graduated in 2026 with a B.Tech and a CGPA of 8.3.</p>
+        <p>Alongside classes I was the graphics lead at Awaaz ADGITM, from January 2023 to August 2025. It is why this page cares as much about how things look as about how they work.</p>
+        <p>The degree gave me the foundations. The projects gave me a question that keeps coming back: when a model gives an answer, can the person reading it check where it came from? Six repositories later, that question is the thread through everything below.</p>
+        <dl class="facts">
+          <div class="fact"><dt>Degree</dt><dd>B.Tech, Computer Science</dd></div>
+          <div class="fact"><dt>Graduated</dt><dd>2026</dd></div>
+          <div class="fact"><dt>CGPA</dt><dd>8.3</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter" id="timeline" data-title="Timeline">
+    <div class="wrap">
+      <div class="chapter-grid">
+        <div class="ch-head">
+          <p class="ch-no">Chapter II</p>
+          <h2 class="ch-title">The Timeline</h2>
+          <p class="ch-sub">Five stops, one line.</p>
+        </div>
+        <div class="prose">
+          <p>From a graphics desk to the Indian Navy, a consulting firm, an AI startup and then FutureVerse. Drag across the timeline below, or press play, and see where I was in any month since January 2023.</p>
+        </div>
+      </div>
+      <div class="time">
+        <div class="time-top">
+          <p class="label" style="margin:0">Scrub through time</p>
+          <button class="btn ghost" id="play" type="button">&#9654; Replay the journey</button>
+        </div>
+        <div class="gantt" id="gantt"></div>
+        <input class="range" id="range" type="range" min="0" max="45" value="45" aria-label="Month on the timeline">
+        <div class="readout" aria-live="polite">
+          <p class="when" id="when">Now</p>
+          <div class="now-roles" id="nowRoles"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter" id="sky-map" data-title="The Sky">
+    <div class="wrap">
+      <p class="ch-no">Chapter III</p>
+      <h2 class="ch-title">The Sky</h2>
+      <p class="ch-sub">Six repositories, three constellations.</p>
+      <div class="sky-intro prose" style="margin-top:22px">
+        <p>Each repository is a star, and the bigger the star, the more commits behind it. Pick a star to read its story, or light up the stars that share a skill.</p>
+      </div>
+      <p class="pull">The thread: AI answers <em>a person can check</em>.</p>
+
+      <div class="toolbar">
+        <p class="label">Light up stars that use</p>
+        <div class="chips" id="filters"></div>
+      </div>
+      <div class="map" id="map">
+        <div id="mapSvg"></div>
+        <div class="map-tools">
+          <div class="legend">
+            <span>Star size = commits so far</span>
+            <svg viewBox="0 0 56 20" aria-hidden="true"><circle cx="8" cy="10" r="2.5" fill="currentColor"/><circle cx="26" cy="10" r="4.5" fill="currentColor"/><circle cx="46" cy="10" r="7" fill="currentColor"/></svg>
+            <span>Small unlabeled stars are scenery</span>
+          </div>
+          <button class="replay" id="trace" type="button">&#8635; Trace the constellations</button>
+        </div>
+      </div>
+
+      <div class="panel-wrap">
+        <div class="tabs" id="tabs" role="group" aria-label="Choose a project"></div>
+        <div class="panel" id="panel" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter" id="futureverse" data-title="FutureVerse">
+    <div class="wrap chapter-grid">
+      <div class="ch-head">
+        <p class="ch-no">Chapter IV</p>
+        <h2 class="ch-title">FutureVerse</h2>
+        <p class="ch-sub">The sky gets bigger.</p>
+      </div>
+      <div class="prose">
+        <p>In May 2026 I joined FutureVerse as an AI Engineer, and I am now a full-time member of the team in Delhi. I work on a platform that captures an organization's knowledge continuously and moves it through pipelines until people can use it.</p>
+        <p>The role covers four areas. Pick one on the orbit.</p>
+        <div class="orbit" id="orbit">
+          <svg viewBox="0 0 400 400" aria-hidden="true">
+            <circle class="ring-a" cx="200" cy="200" r="144"/>
+            <circle class="ring-a" cx="200" cy="200" r="190" style="opacity:.5"/>
+            <circle class="ring-dots" cx="200" cy="200" r="190"/>
+          </svg>
+          <div class="center" id="orbitText"></div>
+        </div>
+        <div class="chips orbit-tabs" id="orbitTabs"></div>
+        <dl class="facts">
+          <div class="fact"><dt>Role</dt><dd>AI Engineer</dd></div>
+          <div class="fact"><dt>Since</dt><dd>May 2026</dd></div>
+          <div class="fact"><dt>Type</dt><dd>Full-time, on-site</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter" id="signal" data-title="Signal">
+    <div class="wrap">
+      <p class="ch-no">Chapter V</p>
+      <h2 class="big">The sky is <span>not finished.</span></h2>
+      <div class="prose">
+        <p>Next on the map: the NLP to SQL project has query validation, multi-table joins, conversation memory, role-based authentication and an online deployment planned. LeadGen AI is waiting for its features. And there are stars I have not lit yet.</p>
+        <p>If you are building something that needs AI people can trust, I would like to hear about it.</p>
+      </div>
+      <div class="links">
+        <a class="btn" href="https://github.com/11SShukla" target="_blank" rel="noopener">GitHub &nearr;</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/shrestha-shukla-16316a25b/" target="_blank" rel="noopener">LinkedIn &nearr;</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="wrap">
+    <span>&copy; 2026 Shrestha Shukla</span>
+    <span>Built as a night sky. Delhi, India.</span>
+  </footer>
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>
